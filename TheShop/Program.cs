@@ -1,4 +1,7 @@
 ﻿using System;
+using TheShop.Common;
+using TheShop.Services;
+using TheShop.Utils;
 
 namespace TheShop
 {
@@ -6,7 +9,7 @@ namespace TheShop
     {
         private static void Main(string[] args)
         {
-            #region confoguration
+            #region configuration
 
             DatabaseContext context = new InMemoryDatabaseDatabaseContext();
             ILogger logger = new ConsoleLogger();
@@ -24,9 +27,9 @@ namespace TheShop
 
             var article = shopService.GetById(1);
             shopService.DisplayArticle(article);
-
+             
             var newArticle = shopService.GetById(12);
-            Console.WriteLine("Found article with ID: " + article.ID);
+            shopService.DisplayArticle(newArticle);
 
             Console.ReadKey();
         }

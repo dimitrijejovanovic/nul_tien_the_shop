@@ -46,8 +46,8 @@ namespace TheShop.Models.Entities
 
         public bool IsOrderable(int? maxPrice = null)
         {
-            return !IsSold && maxPrice.HasValue ? maxPrice < ArticlePrice : true;
+            return !IsSold && maxPrice.HasValue ? maxPrice > ArticlePrice : true;
         }
     }
 }
-}
+
