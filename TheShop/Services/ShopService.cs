@@ -17,17 +17,24 @@ namespace TheShop.Services
 
         public Article OrderArticle(int idArticle, int maxExpectedPrice)
         {
-            var article = _context.Articles.GetById(idArticle);
-            if (article != null && article.IsOrderable(maxExpectedPrice))
+            try
             {
-                return article;
+                var article = _context.Articles.GetById(idArticle);
+                if (article.IsOrderable(maxExpectedPrice))
+                {
+                    return article;
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                _logger.Error("Could not order article with id=" + idArticle +
-                    ", with price less than " + maxExpectedPrice);
-                return null;
+                _logger.Error(ex.Message);
             }
+
+            _logger.Error("Could not order article with id=" + idArticle +
+                ", with price less than " + maxExpectedPrice);
+
+            return null;
         }
 
         public void SellArticle(Article article, int buyerId)
@@ -47,7 +54,7 @@ namespace TheShop.Services
             catch (Exception ex)
             {
                 _logger.Error(ex.Message);
-                _logger.Error("Could not save article with id=" + article.ID);
+                _logger.Error("Could not save article with id=" + article?.ID);
             }
         }
 

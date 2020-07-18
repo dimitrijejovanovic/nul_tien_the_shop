@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheShop.Models.Entities
 {
@@ -33,6 +31,11 @@ namespace TheShop.Models.Entities
 
         public void AddArticle(Article article)
         {
+            if (article == null)
+            {
+                throw new Exception("Can't add empty article");
+            }
+
             Articles.Add(article);
             article.SetSuplier(this);
         }

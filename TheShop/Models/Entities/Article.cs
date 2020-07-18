@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheShop.Models.Entities
 {
@@ -36,7 +33,8 @@ namespace TheShop.Models.Entities
 
         public void SetSuplier(Supplier supplier)
         {
-            Supplier = supplier;
+            Supplier = supplier ?? throw new Exception("No supplier provided to article");
+
             if (!supplier.Articles.Any(a => a == this))
                 supplier.Articles.Add(this);
 
@@ -46,7 +44,7 @@ namespace TheShop.Models.Entities
 
         public bool IsOrderable(int? maxPrice = null)
         {
-            return !IsSold && maxPrice.HasValue ? maxPrice > ArticlePrice : true;
+            return !IsSold && (maxPrice.HasValue ? maxPrice > ArticlePrice : true);
         }
     }
 }

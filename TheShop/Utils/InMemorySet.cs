@@ -29,7 +29,9 @@ namespace TheShop.Utils
 
         public TEntity GetById(int id)
         {
-            return _entities.SingleOrDefault(x => x.ID == id);
+
+            return _entities.Single(x => x.ID == id);
+
         }
 
         public void Remove(TEntity entity)
