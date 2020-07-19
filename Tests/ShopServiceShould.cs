@@ -23,8 +23,7 @@ namespace Tests
             var article = shopService.OrderArticle(It.IsAny<int>(), articlePrice + 1);
 
             mockDbSet.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
-            Assert.True(article != null);
-
+            Assert.NotNull(article);
         }
 
         [Fact]
@@ -40,7 +39,7 @@ namespace Tests
             var article = shopService.OrderArticle(It.IsAny<int>(), It.IsAny<int>());
 
             mockDbSet.Verify(mock => mock.GetById(It.IsAny<int>()), Times.Once);
-            Assert.True(article == null);
+            Assert.Null(article);
         }
 
         [Fact]
@@ -49,9 +48,10 @@ namespace Tests
             Mock<DatabaseContext> mockContext = new Mock<DatabaseContext>();
             Mock<ILogger> mockLogger = new Mock<ILogger>();
             mockLogger.Setup(m => m.Info(It.IsAny<string>()));
+            Mock<Article> mockArticle = new Mock<Article>();
             var shopService = new ShopService(mockContext.Object, mockLogger.Object);
 
-            shopService.SellArticle(new Article(), It.IsAny<int>());
+            shopService.SellArticle(mockArticle.Object, It.IsAny<int>());
 
             mockLogger.Verify(mock => mock.Info(It.IsAny<string>()), Times.Once);
         }
@@ -68,6 +68,33 @@ namespace Tests
             shopService.SellArticle(null, It.IsAny<int>());
 
             mockLogger.Verify(mock => mock.Info(It.IsAny<string>()), Times.Never);
+            mockLogger.Verify(mock => mock.Error(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void SuccessfulDisplayTest()
+        {
+            Mock<Article> mockArticle = new Mock<Article>();
+            Mock<DatabaseContext> mockContext = new Mock<DatabaseContext>();
+            Mock<ILogger> mockLogger = new Mock<ILogger>();
+            mockLogger.Setup(m => m.Info(It.IsAny<string>()));
+            var shopService = new ShopService(mockContext.Object, mockLogger.Object);
+
+            shopService.DisplayArticle(mockArticle.Object);
+
+            mockLogger.Verify(mock => mock.Info(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void DisplayNoArticleTest()
+        {
+            Mock<DatabaseContext> mockContext = new Mock<DatabaseContext>();
+            Mock<ILogger> mockLogger = new Mock<ILogger>();
+            mockLogger.Setup(m => m.Error(It.IsAny<string>()));
+            var shopService = new ShopService(mockContext.Object, mockLogger.Object);
+
+            shopService.DisplayArticle(null);
+
             mockLogger.Verify(mock => mock.Error(It.IsAny<string>()), Times.Once);
         }
 

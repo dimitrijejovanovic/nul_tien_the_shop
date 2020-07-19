@@ -1,5 +1,6 @@
 ﻿using System;
 using TheShop.Common;
+using TheShop.Models.Entities;
 using TheShop.Services;
 using TheShop.Utils;
 
@@ -20,15 +21,15 @@ namespace TheShop
             var shopService = new ShopService(context, logger);
 
             #endregion
-            
-            var orderedArticle = shopService.OrderArticle(1, 500);
+
+            Article orderedArticle = shopService.OrderArticle(3, 500);
             shopService.DisplayArticle(orderedArticle);
             shopService.SellArticle(orderedArticle, 10);
 
-            var article = shopService.GetById(1);
+            Article article = shopService.GetById(1);
             shopService.DisplayArticle(article);
-             
-            var newArticle = shopService.GetById(12);
+
+            Article newArticle = shopService.GetById(12);
             shopService.DisplayArticle(newArticle);
 
             Console.ReadKey();

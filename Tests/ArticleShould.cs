@@ -94,5 +94,29 @@ namespace Tests
 
             Assert.False(article.IsOrderable(articlePrice + 1));
         }
+
+
+        [Fact]
+        public void SetValidPriceTest()
+        {
+            Article article = new Article();
+            int price = 10;
+
+            article.SetPrice(price);
+
+            Assert.Equal(article.ArticlePrice, price);
+        }
+
+        [Fact]
+        public void SetNegativePriceValueTest()
+        {
+            Article article = new Article();
+            int price = -10;
+
+            Action testCode = () => { article.SetPrice(price); };
+            var exception = Record.Exception(testCode);
+
+            Assert.NotNull(exception);
+        }
     }
 }

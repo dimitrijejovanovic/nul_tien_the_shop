@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TheShop.Models.Entities
 {
-    public sealed class Supplier : Entity
+    public class Supplier : Entity
     {
         public string Name { get; private set; }
         public List<Article> Articles { get; private set; }

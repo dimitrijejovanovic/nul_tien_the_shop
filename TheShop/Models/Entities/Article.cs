@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TheShop.Models.Entities
 {
-    public sealed class Article: Entity
+    public class Article: Entity
     {
         public string Name { get; private set; }
 
@@ -21,7 +21,12 @@ namespace TheShop.Models.Entities
 
         public Article(int price)
         {
-            ArticlePrice = price;
+            SetPrice(price);
+        }
+
+        public void SetPrice(int price)
+        {
+            ArticlePrice = price >= 0 ? ArticlePrice = price : throw new Exception("Price can't be negative");
         }
 
         public void Sell(int buyerId)
