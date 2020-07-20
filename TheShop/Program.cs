@@ -15,10 +15,10 @@ namespace TheShop
             DatabaseContext context = new InMemoryDatabaseDatabaseContext();
             ILogger logger = new ConsoleLogger();
 
-            var dataProvider = new InMemoryDataProvider(context);
+            var dataProvider = new InMemoryDataSeeder(context);
             dataProvider.AddInitialData();
 
-            var shopService = new ShopService(context, logger);
+            IShopService shopService = new ShopService(context, logger);
 
             #endregion
 

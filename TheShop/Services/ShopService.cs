@@ -4,7 +4,7 @@ using TheShop.Models.Entities;
 
 namespace TheShop.Services
 {
-    public sealed class ShopService
+    public sealed class ShopService: IShopService
     {
         private DatabaseContext _context;
         private ILogger _logger;

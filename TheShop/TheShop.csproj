@@ -45,6 +45,7 @@
     <Compile Include="Common\DatabaseContext.cs" />
     <Compile Include="Common\IDatabaseSet.cs" />
     <Compile Include="Common\ILogger.cs" />
+    <Compile Include="Common\IShopService.cs" />
     <Compile Include="Models\Entities\Article.cs" />
     <Compile Include="Models\Entities\Entity.cs" />
     <Compile Include="Models\Entities\Supplier.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="Services\ShopService.cs" />
     <Compile Include="Utils\ConsoleLogger.cs" />
     <Compile Include="Utils\InMemoryDatabaseDatabaseContext.cs" />
-    <Compile Include="Utils\InMemoryDataProvider.cs" />
+    <Compile Include="Utils\InMemoryDataSeeder.cs" />
     <Compile Include="Utils\InMemorySet.cs" />
   </ItemGroup>
   <ItemGroup>

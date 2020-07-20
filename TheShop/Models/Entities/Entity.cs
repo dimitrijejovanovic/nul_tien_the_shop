@@ -8,6 +8,6 @@ namespace TheShop.Models.Entities
 {
     public abstract class Entity
     {
-        public int ID { get; set; }
+        public virtual int ID { get; set; }
     }
 }

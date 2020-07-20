@@ -8,11 +8,11 @@ using TheShop.Models.Entities;
 
 namespace TheShop.Utils
 {
-    public sealed class InMemoryDataProvider
+    public sealed class InMemoryDataSeeder
     {
         private DatabaseContext _context;
 
-        public InMemoryDataProvider(DatabaseContext context)
+        public InMemoryDataSeeder(DatabaseContext context)
         {
             _context = context;
         }
