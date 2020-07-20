@@ -18,7 +18,6 @@ namespace TheShop.Utils
 
         public void Add(TEntity entity)
         {
-            entity.ID = _entities.Count > 0 ? _entities.Last().ID + 1 : 1;
             _entities.Add(entity);
         }
 
@@ -29,9 +28,7 @@ namespace TheShop.Utils
 
         public TEntity GetById(int id)
         {
-
             return _entities.Single(x => x.ID == id);
-
         }
 
         public void Remove(TEntity entity)

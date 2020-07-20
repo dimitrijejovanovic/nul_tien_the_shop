@@ -45,6 +45,9 @@ namespace TheShop.Models.Entities
 
             if (Name == null)
                 Name = "Article from " + supplier.Name;
+
+            // calculate id logic
+            ID = 1;
         }
 
         public bool IsOrderable(int? maxPrice = null)

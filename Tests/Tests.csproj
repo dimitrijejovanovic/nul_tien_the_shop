@@ -76,9 +76,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ShopServiceShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ArticleShould.cs" />
+    <Compile Include="SupplierOrganisationShould.cs" />
     <Compile Include="SupplierShould.cs" />
   </ItemGroup>
   <ItemGroup>

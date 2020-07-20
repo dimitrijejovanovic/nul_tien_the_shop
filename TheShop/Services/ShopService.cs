@@ -4,7 +4,7 @@ using TheShop.Models.Entities;
 
 namespace TheShop.Services
 {
-    public sealed class ShopService: IShopService
+    public sealed class ShopService : IShopService
     {
         private DatabaseContext _context;
         private ILogger _logger;
@@ -15,15 +15,19 @@ namespace TheShop.Services
             _logger = logger;
         }
 
+
+        public void OrderAndSellArticle(int idArticle, int maxExpectedPrice, int buyerId)
+        {
+            var article = OrderArticle(idArticle, maxExpectedPrice);
+            SellArticle(article, buyerId);
+        }
+
         public Article OrderArticle(int idArticle, int maxExpectedPrice)
         {
             try
             {
-                var article = _context.Articles.GetById(idArticle);
-                if (article.IsOrderable(maxExpectedPrice))
-                {
-                    return article;
-                }
+                var organisation = _context.Organisations.GetById(1) ?? throw new Exception("There is no Organisation");
+                return organisation.OrderArticle(idArticle, maxExpectedPrice);
 
             }
             catch (Exception ex)
@@ -49,6 +53,7 @@ namespace TheShop.Services
                 _logger.Debug("Trying to sell article with id=" + article.ID);
                 article.Sell(buyerId);
                 _logger.Info("Article with id=" + article.ID + " is sold.");
+                _context.SoldArticles.Add(article);
 
             }
             catch (Exception ex)
@@ -72,11 +77,11 @@ namespace TheShop.Services
         {
             try
             {
-                return _context.Articles.GetById(id);
+                return _context.SoldArticles.GetById(id);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message);
+                _logger.Error("Article not found: " + ex.Message);
                 return null;
             }
         }

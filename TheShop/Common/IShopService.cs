@@ -9,8 +9,7 @@ namespace TheShop.Common
 {
     public interface IShopService
     {
-        Article OrderArticle(int idArticle, int maxExpectedPrice);
-        void SellArticle(Article article, int buyerId);
+        void OrderAndSellArticle(int idArticle, int maxExpectedPrice, int buyerId);
         void DisplayArticle(Article article);
         Article GetById(int id);
     }

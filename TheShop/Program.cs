@@ -22,9 +22,7 @@ namespace TheShop
 
             #endregion
 
-            Article orderedArticle = shopService.OrderArticle(3, 500);
-            shopService.DisplayArticle(orderedArticle);
-            shopService.SellArticle(orderedArticle, 10);
+            shopService.OrderAndSellArticle(1, 20, 10);
 
             Article article = shopService.GetById(1);
             shopService.DisplayArticle(article);

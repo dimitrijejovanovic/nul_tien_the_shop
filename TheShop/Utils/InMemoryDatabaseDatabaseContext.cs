@@ -7,8 +7,11 @@ namespace TheShop.Utils
     {
         public InMemoryDatabaseDatabaseContext()
         {
-            Articles = new InMemorySet<Article>();
+            Organisations = new InMemorySet<SupplierOrganisation>();
             Suppliers = new InMemorySet<Supplier>();
+            SoldArticles = new InMemorySet<Article>();
+
+
         }
 
         public override void Save()

@@ -19,24 +19,26 @@ namespace TheShop.Utils
 
         public void AddInitialData()
         {
-            var supplier1 = new Supplier("Supplier 1");
+            Supplier supplier1 = new Supplier1("Supplier 1");
             var article1 = new Article(458);
             supplier1.AddArticle(article1);
-
-            _context.Articles.Add(article1);
             _context.Suppliers.Add(supplier1);
 
-            var supplier2 = new Supplier("Supplier 2");
+            Supplier supplier2 = new Supplier2("Supplier 2");
             var article2 = new Article(459);
             supplier2.AddArticle(article2);
-            _context.Articles.Add(article2);
             _context.Suppliers.Add(supplier2);
 
             var article3 = new Article(460);
-            var supplier3 = new Supplier("Supplier 3");
+            Supplier supplier3 = new Supplier3("Supplier 3");
             supplier3.AddArticle(article3);
-            _context.Articles.Add(article3);
-            _context.Suppliers.Add(supplier3);
+
+            SupplierOrganisation organisation = new SupplierOrganisation() { ID = 1 };
+            organisation.AddSupplier(supplier1);
+            organisation.AddSupplier(supplier2);
+            organisation.AddSupplier(supplier3);
+            _context.Organisations.Add(organisation);
+
         }
     }
 }

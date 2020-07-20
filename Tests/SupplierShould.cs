@@ -13,7 +13,7 @@ namespace Tests
             {
                 ID = 2
             };
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
             supplier.AddArticle(article);
 
             Assert.True(supplier.ArticleInInventory(article.ID));
@@ -27,7 +27,7 @@ namespace Tests
                 ID = 2
             };
             article.Sell(12);
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
             supplier.AddArticle(article);
 
             Assert.False(supplier.ArticleInInventory(article.ID));
@@ -36,7 +36,7 @@ namespace Tests
         [Fact]
         public void NoArticleInEmptyInventoryTest()
         {
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
 
             Assert.False(supplier.ArticleInInventory(23));
         }
@@ -48,7 +48,7 @@ namespace Tests
             {
                 ID = 2
             };
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
             supplier.AddArticle(article);
 
             Assert.False(supplier.ArticleInInventory(23));
@@ -61,7 +61,7 @@ namespace Tests
             {
                 ID = 2
             };
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
             supplier.AddArticle(article);
 
             var articleFromInventory = supplier.GetArticle(article.ID);
@@ -72,7 +72,7 @@ namespace Tests
         [Fact]
         public void GetArticalFromEmptyInventoryTest()
         {
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
 
             var articleFromInventory = supplier.GetArticle(23);
 
@@ -86,7 +86,7 @@ namespace Tests
             {
                 ID = 2
             };
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
             supplier.AddArticle(article);
 
             var articleFromInventory = supplier.GetArticle(23);
@@ -101,7 +101,7 @@ namespace Tests
             {
                 ID = 2
             };
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
 
             supplier.AddArticle(article);
 
@@ -115,7 +115,7 @@ namespace Tests
             {
                 ID = 2
             };
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
 
             supplier.AddArticle(article);
 
@@ -125,11 +125,45 @@ namespace Tests
         [Fact]
         public void AddNullArticleTest()
         {
-            var supplier = new Supplier();
+            var supplier = new Supplier1();
 
             Action testCode = () => { supplier.AddArticle(null); };
 
             Assert.NotNull(Record.Exception(testCode));
+        }
+
+        [Fact]
+        public void SuccessfulHasViableleArticle()
+        {
+            int price = 10;
+            int idArticle = 2;
+            var validArticle = new Article(price) { ID = idArticle };
+            var supplier = new Supplier1("Supplier 1");
+            supplier.AddArticle(validArticle);
+
+            Assert.True(supplier.HasViableleArticle(idArticle, price + 1));
+        }
+
+        [Fact]
+        public void HasViableleArticleWithIncorrectArticleId()
+        {
+            int price = 10;
+            int idArticle = 2;
+            var validArticle = new Article(price) { ID = idArticle };
+            var supplier = new Supplier1("Supplier 1");
+            supplier.AddArticle(validArticle);
+
+            Assert.False(supplier.HasViableleArticle(idArticle + 1, price + 1));
+        }
+
+        [Fact]
+        public void HasViableleArticleWithNoArticle()
+        { 
+            int price = 10;
+            int idArticle = 2;
+            var supplier = new Supplier1("Supplier 1");
+
+            Assert.False(supplier.HasViableleArticle(idArticle, price + 1));
         }
     }
 }

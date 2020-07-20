@@ -4,8 +4,9 @@ namespace TheShop.Common
 {
     public abstract class DatabaseContext
     {
-        public IDatabaseSet<Article> Articles;
+        public IDatabaseSet<SupplierOrganisation> Organisations;
         public IDatabaseSet<Supplier> Suppliers;
+        public IDatabaseSet<Article> SoldArticles;
 
         public abstract void Save();
     }

@@ -22,7 +22,7 @@ namespace Tests
         public void SetSupplierTest()
         {
             Article article = new Article(200);
-            Supplier supplier = new Supplier("Sup 1");
+            Supplier supplier = new Supplier1("Sup 1");
 
             article.SetSuplier(supplier);
 
@@ -33,7 +33,7 @@ namespace Tests
         public void SetSuppliersAddArticleTest()
         {
             Article article = new Article(200);
-            Supplier supplier = new Supplier("Sup 1");
+            Supplier supplier = new Supplier1("Sup 1");
 
             article.SetSuplier(supplier);
 

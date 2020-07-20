@@ -4,9 +4,10 @@ using System.Linq;
 
 namespace TheShop.Models.Entities
 {
-    public class Supplier : Entity
+    public abstract class Supplier : Entity
     {
         public string Name { get; private set; }
+        public SupplierOrganisation Organisation { get; private set; }
         public List<Article> Articles { get; private set; }
 
         public Supplier()
@@ -38,6 +39,20 @@ namespace TheShop.Models.Entities
 
             Articles.Add(article);
             article.SetSuplier(this);
+        }
+
+        public void SetOrganisation(SupplierOrganisation organisation)
+        {
+            Organisation = organisation ?? throw new Exception("No organisation provided to supplier");
+
+            if (!organisation.Suppliers.Any(a => a == this))
+                organisation.AddSupplier(this);
+        }
+
+        public bool HasViableleArticle(int articleId, int maxArticlePrice)
+        {
+            return ArticleInInventory(articleId)
+                    && GetArticle(articleId).IsOrderable(maxArticlePrice);
         }
 
     }
